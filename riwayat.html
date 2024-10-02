@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Lokasi - GPS Tracker</title>
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #map {
+            height: 100%; /* Adjust height to fit below header */
+            width: 100%;
+        }
+        .back-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+        .back-box {
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+            color: black;
+        }
+        .back-button {
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+        .back-button i {
+            color: black;
+            font-size: 15px;
+        }
+        .custom-bar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            width: 300px;
+        }
+        .info-text {
+            color: black;
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .date-text {
+            color: black;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-container">
+        <div class="back-box">
+            <button class="back-button" onclick="window.location.href='dashboard.html'">
+                <i class="fas fa-arrow-left"></i><b>     Kembali</b>
+            </button>
+        </div>
+    </div>
+
+    <div class="custom-bar">
+        <span id="current-date" class="date-text"></span>
+        <br>
+        <span class="info-text">Nama Anggota: </span>
+        <br>
+        <span class="info-text">Alamat Titik Awal: </span>
+        <br>
+        <span class="info-text">Alamat Titik Akhir: </span>
+    </div>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        function formatDate(date) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('id-ID', options);
+        }
+
+        const currentDateElement = document.getElementById('current-date');
+        const today = new Date();
+        currentDateElement.textContent = formatDate(today);
+
+        var map = L.map('map', { zoomControl: false, attributionControl: false }).setView([-6.906814577488162, 107.61529693892598], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+    </script>
+</body>
+
+</html>
